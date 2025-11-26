@@ -33,9 +33,7 @@ A aplicação deve conter os seguintes endpoints:
 
 ---
 
-## 🧱 Estrutura do Projeto (Clean Architecture)
-
-Solução proposta utilizando Clean Architecture:
+## 🧱 Solução proposta utilizando Clean Architecture:
 
 ### Raiz do Projeto
 
