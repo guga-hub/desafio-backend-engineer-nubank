@@ -1,4 +1,7 @@
 package com.challenge.backend.nubank.infrastructure.repositories;
 
-public class ContactRepository {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class ContactRepository{
 }
