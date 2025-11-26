@@ -26,3 +26,5 @@ Documentação com Swagger
 
 Tecnologias Usadas
 Java  Spring Boot  Spring Data JPA  PostgreSQL  Lombok  Docker 
+
+//Desafio retirado do github: https://github.com/Maykon-JDS/desafio-backend-nubank?tab=readme-ov-file
