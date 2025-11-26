@@ -1,30 +1,113 @@
-# desafio-backend-engineer-nubank
-Construir uma API REST para gerenciamento de clientes e seus contatos. Cada cliente pode ter um ou mais contatos associados.
+# Desafio Backend Engineer – Nubank
 
-Requisitos Técnicos
-A aplicação deve conter:
+Construir uma API REST para gerenciamento de clientes e seus contatos.  
+Cada cliente pode ter um ou mais contatos associados.
 
-Cadastro de Cliente: POST /clientes
-Cadastro de Contato associado a um cliente existente: POST /contatos
-Listagem de todos os clientes com seus contatos: GET /clientes
-Listagem de contatos de um cliente específico: GET /clientes/{id}/contatos
-Uso do Spring Boot + Spring Data JPA
-Banco de Dados PostgreSQL
-Entidades Cliente e Contato com relacionamento @OneToMany / @ManyToOne
-Requisitos de Código
-Esperamos que o código siga boas práticas de desenvolvimento, incluindo:
+---
 
-Separação de responsabilidades (controller, service, repository)
-Uso de DTOs para entrada e saída de dados
-Tratamento adequado de erros
-Uso de Lombok
-Diferenciais (Não obrigatórios)
-Uso de Docker para subir o PostgreSQL
-Testes automatizados
-Documentação com Swagger
+## 🟣 Requisitos Técnicos
+
+A aplicação deve conter os seguintes endpoints:
+
+- **POST /clientes** — Cadastro de Cliente  
+- **POST /contatos** — Cadastro de Contato associado a um cliente existente  
+- **GET /clientes** — Listagem de todos os clientes com seus contatos  
+- **GET /clientes/{id}/contatos** — Listagem de contatos de um cliente específico  
+
+**Tecnologias obrigatórias:**
+- Spring Boot  
+- Spring Data JPA  
+- PostgreSQL  
+- Lombok  
+
+**Boas práticas esperadas:**
+- Separação entre Controller, Service/UseCase e Repository  
+- Uso de DTOs  
+- Tratamento adequado de erros  
+- Clean Architecture sugerida  
+
+**Diferenciais (opcionais):**
+- Docker para PostgreSQL  
+- Testes automatizados  
+- Documentação com Swagger  
+
+---
 
 
-Tecnologias Usadas
-Java  Spring Boot  Spring Data JPA  PostgreSQL  Lombok  Docker 
+# 🧱 Estrutura do Projeto (Clean Architecture)
 
-//Desafio retirado do github: https://github.com/Maykon-JDS/desafio-backend-nubank?tab=readme-ov-file
+Solução proposta utilizando Clean Architecture:
+
+src/main/java/com/challenge/backend/nubank/
+│
+├── NubankApplication.java
+│
+├── application/                 # Interface (entrada)
+│   ├── controllers/
+│   │   └── UserController.java
+│   ├── dtos/
+│   │   ├── request/
+│   │   │   ├── CreateClientRequest.java
+│   │   │   └── CreateContactRequest.java
+│   │   └── response/
+│   │       ├── ClientResponse.java
+│   │       └── ContactResponse.java
+│   └── mappers/
+│       ├── ClientMapper.java
+│       └── ContactMapper.java
+│
+├── domain/                      # Lógica de negócio (sem dependências externas)
+│   ├── entities/
+│   │   └── Client.java          # Entidade de DOMÍNIO
+│   ├── contact/
+│   │   └── Contact.java
+│   ├── repositories/            # INTERFACES
+│   │   ├── IClientRepository.java
+│   │   └── IContactRepository.java
+│   ├── usecases/                # Casos de uso (serviços de negócio)
+│   │   ├── client/
+│   │   │   ├── CreateClientUseCase.java
+│   │   │   ├── GetClientUseCase.java
+│   │   │   └── UpdateClientUseCase.java
+│   │   └── contact/
+│   │       ├── CreateContactUseCase.java
+│   │       └── GetContactUseCase.java
+│   ├── vos/                     # Value Objects
+│   │   ├── ClientVO.java
+│   │   └── ContactVO.java
+│   └── exceptions/              # Exceções de negócio
+│       ├── ClientNotFoundException.java
+│       └── InvalidClientException.java
+│
+├── infrastructure/              # Implementação técnica (dependências externas)
+│   ├── persistence/
+│   │   ├── entities/            # JPA Entities
+│   │   │   ├── ClientJpaEntity.java
+│   │   │   └── ContactJpaEntity.java
+│   │   └── repositories/        # Implementações
+│   │       ├── ClientRepositoryImpl.java
+│   │       └── ContactRepositoryImpl.java
+│   └── mappers/
+│       ├── ClientPersistenceMapper.java
+│       └── ContactPersistenceMapper.java
+│
+├── config/
+│   └── GlobalExceptionHandler.java   # Tratativa de Errors Globais
+│
+├── exceptions/
+│   └── RepositoryException.java
+│
+├── shared/
+│   ├── constants/
+│   │   └── Constants.java
+│   └── utils/
+│       └── Validators/
+│
+└──
+src/main/resources/
+│   ├── application.yaml
+│   └── db/
+│       └── migration/
+│           ├── V001__client_register.sql
+│           └── V002__contact_register.sql
+
