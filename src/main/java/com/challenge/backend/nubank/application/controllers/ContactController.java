@@ -30,9 +30,9 @@ public class ContactController {
                    @ApiResponse(responseCode = "404", description = "Contato não encontrado"),
                    @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
-    @PostMapping
+    @PostMapping("/createContact")
     public ResponseEntity<ContactVO> createContact(@RequestBody @Valid ContactRequestDTO contactRequestDTO) {
         var contact = contactRepository.save(contactMapper.dtoToEntity(contactRequestDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(contact);
+        return ResponseEntity.status(HttpStatus.CREATED).body(contactMapper.toVO(contact));
     }
 }
