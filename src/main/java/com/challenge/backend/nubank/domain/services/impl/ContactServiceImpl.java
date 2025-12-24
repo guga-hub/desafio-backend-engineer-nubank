@@ -12,8 +12,8 @@ public class ContactServiceImpl implements ContactServiceInterface {
 
     private final ContactCreateUseCase contactCreateUseCase;
 
-    @Override
-    public ContactVO createContact(ContactVO contactVO) {
-        return createContact(contactVO);
-    }
+@Override
+public ContactVO createContact(ContactVO contactVO) {
+    return contactCreateUseCase.createContact(contactVO);
+}
 }

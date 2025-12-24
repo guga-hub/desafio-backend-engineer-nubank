@@ -8,23 +8,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.EntityListeners;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.persistence.EntityListeners;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cliente")
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
@@ -51,10 +47,10 @@ public class ClientEntity {
     private ContactEntity contact;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(name = "aud_create_date", nullable = false, updatable = false)
     private LocalDateTime audCreateDate;
 
     @LastModifiedDate
-    @Column(nullable = false)
+    @Column(name = "aud_update_date", nullable = false)
     private LocalDateTime audUpdateDate;
 }
